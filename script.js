@@ -23,7 +23,7 @@ const updateBackground = function (newBackground) {
   document.querySelector("body").style.backgroundColor = newBackground;
 };
 
-document.querySelector(".check").addEventListener("click", function () {
+const playGame = function () {
   const guess = Number(document.querySelector(".guess").value);
 
   //   No input or not a number
@@ -54,9 +54,9 @@ document.querySelector(".check").addEventListener("click", function () {
       updateScore(0);
     }
   }
-});
+};
 
-document.querySelector(".again").addEventListener("click", function () {
+const playAgain = function () {
   confetti.stop();
   score = 20;
   secretNumber = Math.trunc(Math.random() * 20) + 1;
@@ -67,4 +67,7 @@ document.querySelector(".again").addEventListener("click", function () {
   document.querySelector(".number").style.width = "15rem";
 
   updateBackground("#222");
-});
+};
+
+document.querySelector(".check").addEventListener("click", playGame);
+document.querySelector(".again").addEventListener("click", playAgain);
