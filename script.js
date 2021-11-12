@@ -8,11 +8,12 @@ const displayMessage = function (message) {
   document.querySelector(".message").textContent = message;
 };
 
-const updateNumber = function (value, ...values) {
-  document.querySelector(".number").textContent = value;
-  document.querySelector(".number").style.width = values;
-  document.querySelector(".number").textContent = values;
-};
+// TODO refactor
+// const updateNumber = function (value, ...values) {
+//   document.querySelector(".number").textContent = value;
+//   document.querySelector(".number").style.width = values;
+//   document.querySelector(".number").textContent = values;
+// };
 
 const updateScore = function (newScoreValue) {
   document.querySelector(".score").textContent = newScoreValue;
@@ -38,7 +39,8 @@ document.querySelector(".check").addEventListener("click", function () {
     displayMessage("🏆 You Won! That's the correct Number! 🏆");
     document.querySelector(".highscore").textContent = highscore;
 
-    updateNumber("30rem", secretNumber);
+    document.querySelector(".number").textContent = secretNumber;
+    document.querySelector(".number").style.width = "30rem";
     updateBackground("#60b347");
 
     // wrong guess
@@ -61,6 +63,8 @@ document.querySelector(".again").addEventListener("click", function () {
   displayMessage("Start guessing...");
   document.querySelector(".guess").value = "";
   updateScore(0);
-  updateNumber("15rem", "?");
+  document.querySelector(".number").textContent = "?";
+  document.querySelector(".number").style.width = "15rem";
+
   updateBackground("#222");
 });
