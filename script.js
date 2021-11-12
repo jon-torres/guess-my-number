@@ -36,7 +36,7 @@ document.querySelector(".check").addEventListener("click", function () {
       highscore = score;
     }
     confetti.start();
-    displayMessage("🏆 You Won! That's the correct Number! 🏆");
+    displayMessage("🏆 You Won! That's the correct number! 🏆");
     document.querySelector(".highscore").textContent = highscore;
 
     document.querySelector(".number").textContent = secretNumber;
