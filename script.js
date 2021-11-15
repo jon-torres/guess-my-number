@@ -3,6 +3,7 @@
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
 let highscore = 0;
+let playing = true;
 
 const displayMessage = function (message) {
   document.querySelector(".message").textContent = message;
@@ -24,34 +25,37 @@ const updateBackground = function (newBackground) {
 };
 
 const playGame = function () {
-  const guess = Number(document.querySelector(".guess").value);
+  if (playing) {
+    const guess = Number(document.querySelector(".guess").value);
 
-  //   No input or not a number
-  if (!guess) {
-    displayMessage("Please, guess a number 🔢!");
+    //   No input or not a number
+    if (!guess) {
+      displayMessage("Please, guess a number 🔢!");
 
-    //   Player wins
-  } else if (guess === secretNumber) {
-    if (score > highscore) {
-      highscore = score;
-    }
-    confetti.start();
-    displayMessage("🏆 You Won! That's the correct number! 🏆");
-    document.querySelector(".highscore").textContent = highscore;
+      //   Player wins
+    } else if (guess === secretNumber) {
+      if (score > highscore) {
+        highscore = score;
+      }
+      confetti.start();
+      displayMessage("🏆 You Won! That's the correct number! 🏆");
+      document.querySelector(".highscore").textContent = highscore;
 
-    document.querySelector(".number").textContent = secretNumber;
-    document.querySelector(".number").style.width = "30rem";
-    updateBackground("#60b347");
+      document.querySelector(".number").textContent = secretNumber;
+      document.querySelector(".number").style.width = "30rem";
+      updateBackground("#60b347");
+      playing = false;
 
-    // wrong guess
-  } else if (guess !== secretNumber) {
-    if (score > 1) {
-      displayMessage(guess > secretNumber ? "Too high! 📈" : "Too low! 📉");
-      score--;
-      updateScore(score);
-    } else {
-      displayMessage("💥 You lost the game 😭. Try again! 💪");
-      updateScore(0);
+      // wrong guess
+    } else if (guess !== secretNumber) {
+      if (score > 1) {
+        displayMessage(guess > secretNumber ? "Too high! 📈" : "Too low! 📉");
+        score--;
+        updateScore(score);
+      } else {
+        displayMessage("💥 You lost the game 😭. Try again! 💪");
+        updateScore(0);
+      }
     }
   }
 };
@@ -65,8 +69,8 @@ const playAgain = function () {
   updateScore(0);
   document.querySelector(".number").textContent = "?";
   document.querySelector(".number").style.width = "15rem";
-
   updateBackground("#222");
+  playing = true;
 };
 
 document.querySelector(".check").addEventListener("click", playGame);
